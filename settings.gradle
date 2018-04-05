@@ -1,1 +1,1 @@
-include ':app', ':inject', ':bind-annotation', ':bind-compiler'
+include ':app', ':inject', ':bind-annotation', ':bind-compiler', ':bind'
