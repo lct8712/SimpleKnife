@@ -5,10 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chentian.bind_annotation.Test;
 import com.chentian.inject.InjectClick;
 import com.chentian.inject.InjectKnife;
 import com.chentian.inject.InjectView;
 
+@Test
 public class MainActivity extends AppCompatActivity {
 
     @InjectView(R.id.text_hello) TextView textHello;
