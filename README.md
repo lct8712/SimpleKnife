@@ -10,7 +10,8 @@ inject module 在运行时动态解析注解。
 
 ## Bind
 bind moudle 在编译时用 APT 生成代码，运行时调用生成的代码。
-支持 BindView & BindOnClick & BindString
+
+支持 BindView & BindOnClick & BindString。
 
 参考：
   - [Android APT（编译时代码生成）最佳实践](https://joyrun.github.io/2016/07/19/AptHelloWorld/)
