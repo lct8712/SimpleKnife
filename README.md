@@ -1,6 +1,6 @@
 # SimpleKnife
 
-[ButterKnif](https://github.com/JakeWharton/butterknife) 源码学习
+[ButterKnife](https://github.com/JakeWharton/butterknife) 源码学习
 
 ## Inject
 inject module 在运行时动态解析注解。
