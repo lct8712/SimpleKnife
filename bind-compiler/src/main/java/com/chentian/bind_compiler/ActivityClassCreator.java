@@ -31,6 +31,7 @@ public class ActivityClassCreator {
     private String className;
 
     private Map<String, Integer> bindViewMap;
+    private Map<String, Integer> bindStringMap;
     private Map<String, Integer> bindClickMap;
 
     public ActivityClassCreator(Elements elementUtils, Element element) {
@@ -39,11 +40,16 @@ public class ActivityClassCreator {
         className = typeElement.getSimpleName().toString();
 
         bindViewMap = new HashMap<>();
+        bindStringMap = new HashMap<>();
         bindClickMap = new HashMap<>();
     }
 
     public void addBindView(String fieldName, int id) {
         bindViewMap.put(fieldName, id);
+    }
+
+    public void addBindString(String fieldName, int id) {
+        bindStringMap.put(fieldName, id);
     }
 
     public void addBindClick(String fieldName, int id) {
@@ -63,6 +69,13 @@ public class ActivityClassCreator {
             String fieldName = entry.getKey();
             int id = entry.getValue();
             bindMethodBuilder.addStatement("target.$L = target.findViewById($L)", fieldName, id);
+        }
+
+        // BindString
+        for (Map.Entry<String, Integer> entry : bindStringMap.entrySet()) {
+            String fieldName = entry.getKey();
+            int id = entry.getValue();
+            bindMethodBuilder.addStatement("target.$L = target.getResources().getString($L)", fieldName, id);
         }
 
         // BindClick

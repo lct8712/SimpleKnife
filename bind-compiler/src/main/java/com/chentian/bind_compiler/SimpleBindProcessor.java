@@ -1,7 +1,8 @@
 package com.chentian.bind_compiler;
 
-import com.chentian.bind_annotation.BindView;
 import com.chentian.bind_annotation.BindClick;
+import com.chentian.bind_annotation.BindString;
+import com.chentian.bind_annotation.BindView;
 import com.google.auto.service.AutoService;
 
 import java.io.IOException;
@@ -42,6 +43,7 @@ public class SimpleBindProcessor extends AbstractProcessor {
     public Set<String> getSupportedAnnotationTypes() {
         List<String> annotations = Arrays.asList(
             BindView.class.getCanonicalName(),
+            BindString.class.getCanonicalName(),
             BindClick.class.getCanonicalName()
         );
         return new HashSet<>(annotations);
@@ -52,6 +54,7 @@ public class SimpleBindProcessor extends AbstractProcessor {
         messager.printMessage(Diagnostic.Kind.NOTE, "process start: " + getClass().getName());
 
         ActivityClassCreator creator = processBindView(roundEnv.getElementsAnnotatedWith(BindView.class));
+        creator = processBindString(creator, roundEnv.getElementsAnnotatedWith(BindString.class));
         creator = processBindClick(creator, roundEnv.getElementsAnnotatedWith(BindClick.class));
 
         try {
@@ -76,6 +79,20 @@ public class SimpleBindProcessor extends AbstractProcessor {
             String fieldName = element.getSimpleName().toString();
             int id = element.getAnnotation(BindView.class).value();
             creator.addBindView(fieldName, id);
+        }
+        return creator;
+    }
+
+    private ActivityClassCreator processBindString(ActivityClassCreator creator,
+                                                 Set<? extends Element> elementsAnnotatedWith) {
+        for (Element element : elementsAnnotatedWith) {
+            if (creator == null) {
+                creator = new ActivityClassCreator(elementUtils, element);
+            }
+
+            String fieldName = element.getSimpleName().toString();
+            int id = element.getAnnotation(BindString.class).value();
+            creator.addBindString(fieldName, id);
         }
         return creator;
     }

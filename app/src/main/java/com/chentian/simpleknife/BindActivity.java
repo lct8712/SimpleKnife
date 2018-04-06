@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.chentian.bind.BindKnife;
 import com.chentian.bind_annotation.BindClick;
+import com.chentian.bind_annotation.BindString;
 import com.chentian.bind_annotation.BindView;
 
 /**
@@ -18,6 +19,7 @@ import com.chentian.bind_annotation.BindView;
 public class BindActivity extends AppCompatActivity {
 
     @BindView(R.id.text_hello) TextView textHello;
+    @BindString(R.string.app_name) String appName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,6 @@ public class BindActivity extends AppCompatActivity {
 
     @BindClick(R.id.btn_hello)
     public void onBtnHelloClick() {
-        Toast.makeText(this, "Button Clicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Button Clicked: " + appName, Toast.LENGTH_SHORT).show();
     }
 }
